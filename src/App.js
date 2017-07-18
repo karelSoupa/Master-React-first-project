@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 
 
-function Boxes(props) {
-
+function Box(props) {
     return <div style={{width: props.width, height: 100, backgroundColor: 'powderblue'}}>index {props.index}</div>;
 }
 
@@ -13,30 +12,24 @@ class App extends Component {
         amount: null,
         value: "",
         boxes: []
-
-
     };
 
     handleSubmit = () => {
-        const {amount, boxes} = this.state;
+        const {value} = this.state;
         let boxObj = [];
-        this.setState({amount: this.state.value});
-
-        let index = 1;
-        while (index <= amount) {
-            let substraction = 200 - 10 * index;
+        for (let i = 1; i <= value; i++) {
+            let substraction = 200 - 10 * i;
             boxObj.push({
-                id: index,
+                id: i,
                 width: substraction
             });
-            index++;
         }
+
         this.setState({
             boxes: [
                 ...boxObj
             ]
         });
-        boxes.map((i) => console.log(i.width));
     };
 
     handleKeyDown = (e) => {
@@ -53,8 +46,7 @@ class App extends Component {
                 </p>
                 <input type="submit" value="submit" onClick={this.handleSubmit}/>
                 {
-                    boxes.map((i) => <Boxes
-
+                    boxes.map((i) => <Box
                         key={i.id}
                         width={i.width}
                         index={i.id}
